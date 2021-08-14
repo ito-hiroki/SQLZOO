@@ -80,3 +80,40 @@ from
 where
     yr < 1910 and subject = 'Medicine' or 
     yr >= 2004 and subject = 'Literature'
+
+-- 11
+select
+    *
+from
+    nobel
+where
+    winner = 'PETER GRÜNBERG'
+
+-- 12
+select
+    *
+from
+    nobel
+where
+    winner = 'EUGENE O''NEILL'
+
+-- 13
+select
+    winner, yr, subject
+from
+    nobel
+where
+    winner like 'Sir%'
+order by 
+    yr desc, winner
+
+-- 14
+-- This statement cause error. Why...
+SELECT
+    winner, subject
+FROM
+    nobel
+WHERE
+    yr = 1984
+ORDER BY
+    subject IN ('Physics', 'Chemistry'), subject, winner
