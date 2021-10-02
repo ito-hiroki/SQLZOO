@@ -58,3 +58,39 @@ from
     world
 where
     gdp > all(select gdp from world where continent = 'Europe' and gdp > 0)
+
+-- 7
+select
+    continent, name, area
+FROM 
+    world as x
+where
+    area >= ALL(select
+                    area
+                from
+                    world as y
+                where
+                    y.continent = x.continent and population > 0)
+
+--8
+select
+    continent, name
+from
+    world as x
+where
+    name <= all(select name from world as y where y.continent = x.continent)
+
+--9
+select
+    name, continent, population
+from
+    world as x
+where
+    25000000 > all(
+        select population
+        from world as y
+        where y.continent = x.continent and y.population > 0
+    )
+
+--10
+
