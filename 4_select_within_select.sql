@@ -93,4 +93,13 @@ where
     )
 
 --10
-
+select
+    name, continent
+from
+    world as x
+where 
+    x.population >= 3 * (
+        select max(population)
+        from world as y
+        where y.continent = x.continent and x.name != y.name
+    )
