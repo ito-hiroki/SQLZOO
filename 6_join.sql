@@ -59,3 +59,60 @@ from
 where
     e.coach = 'Fernando Santos'
 ;
+
+-- 7
+select
+    go.player
+from
+    goal as go
+    join game as ga
+    on go.matchid = ga.id
+where
+    ga.stadium = 'National Stadium, Warsaw'
+;
+
+-- 8
+select
+    distinct(player)
+from
+    game
+    join goal
+    on matchid = id
+where
+    (team1 = 'GER' or team2='GER') and teamid != 'GER'
+;
+
+-- 9
+select
+    teamname, count(*)
+from
+    goal
+    join eteam
+    on teamid = id
+group by
+    teamname
+;
+
+-- 10
+select
+    stadium, count(*)
+from
+    goal
+    left outer join game
+    on matchid = id
+group by
+    stadium
+;
+
+-- 11
+select
+    matchid, mdate, count(*)
+from
+    goal
+    left outer join game
+    on matchid = id
+where
+    team1 = 'POL' or team2 = 'POL'
+group by
+    matchid, mdate
+;
