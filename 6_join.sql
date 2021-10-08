@@ -116,3 +116,31 @@ where
 group by
     matchid, mdate
 ;
+
+-- 12
+select
+    matchid, mdate, count(*)
+from
+    goal
+    join game
+    on matchid = id
+where
+    teamid = 'GER'
+group by
+    matchid, mdate
+;
+
+-- 13
+select
+    mdate, 
+    team1, sum(case when teamid = team1 then 1 else 0 end) as score1,
+    team2, sum(case when teamid = team2 then 1 else 0 end) as score2
+from
+    game
+    left outer join goal
+    on id = matchid
+group by
+    mdate, team1, team2
+order by
+    mdate, matchid, team1, team2
+;
