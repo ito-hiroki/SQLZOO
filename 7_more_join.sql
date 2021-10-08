@@ -144,4 +144,5 @@ from
 
     join actor as a
     on tmp.actorid = a.id
+;
 
