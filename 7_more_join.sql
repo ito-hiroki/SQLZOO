@@ -146,3 +146,78 @@ from
     on tmp.actorid = a.id
 ;
 
+-- 13
+select
+    a.name
+from
+    (
+        select
+            actorid
+        from
+            casting
+        where
+            ord = 1
+        group by
+            actorid
+        having
+            count(*) >= 30 
+    ) as c
+
+    join actor as a
+    on a.id = c.actorid
+order by
+    a.name
+;
+
+-- 14
+select
+    m.title, tmp.a_num as 'COUNT(actorid)'
+from
+    (
+        select
+            movieid, count(*) as a_num
+        from
+            casting
+        where
+            movieid in (
+                select
+                    id
+                from
+                    movie
+                where
+                    yr = 1978
+            )
+        group by
+            movieid
+    ) as tmp
+
+    left outer join movie as m
+    on m.id = tmp.movieid
+
+    order by
+        tmp.a_num desc, m.title
+;
+
+-- 15
+select
+    a.name
+from
+    (
+        select 
+            distinct actorid 
+        from
+            casting
+        where
+            movieid in (
+                select
+                    movieid
+                from
+                    casting
+                where
+                    actorid = (select id from actor where name = 'Art Garfunkel')
+            ) and actorid != (select id from actor where name = 'Art Garfunkel')
+    ) as tmp
+
+    join actor as a
+    on a.id = tmp.actorid
+;
