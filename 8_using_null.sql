@@ -64,3 +64,23 @@ from
 group by
     d.name
 ;
+
+-- 9
+select
+    name,
+    case when dept in (1, 2) then 'Sci' else 'Art' end
+from
+    teacher
+;
+
+-- 10
+select
+    name,
+    case 
+        when dept in (1, 2) then 'Sci'
+        when dept = 3 then 'Art' 
+        else 'None'
+    end
+from
+    teacher
+;
